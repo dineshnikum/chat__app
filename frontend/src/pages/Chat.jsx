@@ -16,7 +16,9 @@ const Chat = () => {
 
     // Initialize socket connection
     useEffect(() => {
-        socket = io("http://localhost:5000");
+        const socketURL =
+            import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+        socket = io(socketURL);
         socket.emit("join-chat", user._id);
 
         socket.on("receive-message", (newMessage) => {
